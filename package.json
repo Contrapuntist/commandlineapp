@@ -1,0 +1,19 @@
+{
+  "name": "commandlineapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Contrapuntist/commandlineapp.git"
+  },
+  "author": "Miguel A. Camp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Contrapuntist/commandlineapp/issues"
+  },
+  "homepage": "https://github.com/Contrapuntist/commandlineapp#readme"
+}
