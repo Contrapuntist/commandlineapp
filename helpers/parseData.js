@@ -22,13 +22,17 @@ function splitLine(line) {
 }
 
 function createDataObject(arr) {
-  return { 
-    lastName: arr[0],
-    firstName: arr[1],
-    gender: arr[2],
-    favoriteColor: arr[3],
-    birthDate: arr[4]
-  };
+  if (arr.length > 4) {
+    return { 
+      lastName: arr[0].trim(),
+      firstName: arr[1].trim(),
+      gender: arr[2].trim(),
+      favoriteColor: arr[3].trim(),
+      birthDate: arr[4].trim()
+    };
+  } else {
+    console.log(`data does not have appropriate number of expected values: ${arr}`)
+  }
 }
 
 module.exports = {

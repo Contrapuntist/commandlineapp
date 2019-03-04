@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Contrapuntist/commandlineapp/issues"
   },
-  "homepage": "https://github.com/Contrapuntist/commandlineapp#readme"
+  "homepage": "https://github.com/Contrapuntist/commandlineapp#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
 }
