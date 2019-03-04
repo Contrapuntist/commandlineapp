@@ -6,6 +6,7 @@ const port = 3000;
 const { parseData } = require('./helpers/parseData');
 const getDataFromFile = require('./helpers/getDataFromFile');
 const { sortbyGender, sortBybirthDate, sortByLastName_desc } = require('./helpers/sort');
+const displayInConsole = require('./helpers/displayInConsole');
 
 app.use(bodyParser.urlencoded({extended:false})); 
 app.use(bodyParser.json()); 
@@ -49,3 +50,8 @@ fileListInput.forEach(file => {
  */
 const appData = dataFromAllFiles.map(data => parseData(data))[0];
 //appData.then(result => console.log('promised results', result.sort((obj1, obj2) => obj1.gender > obj2.gender )));
+
+//sortbyGender, sortBybirthDate, sortByLastName_desc
+displayInConsole(sortbyGender(appData), 'Data sorted by gender');
+displayInConsole(sortBybirthDate(appData), 'Data sorted by birthdate');
+displayInConsole(sortByLastName_desc(appData), 'Data sorted by name');
