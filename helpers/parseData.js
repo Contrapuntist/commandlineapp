@@ -4,7 +4,9 @@ function parseData(data) {
   splitByLine.forEach(line => {
     if(line !== '') {
       const lineInArr = splitLine(line);
-      parsedData.push(createDataObject(lineInArr));
+      if (lineInArr.length > 4) {
+        parsedData.push(createDataObject(lineInArr));
+      }
     }
   });
   
@@ -31,7 +33,8 @@ function createDataObject(arr) {
       birthDate: arr[4].trim()
     };
   } else {
-    console.log(`data does not have appropriate number of expected values: ${arr}`)
+    console.log(`data does not have appropriate number of expected values: ${arr}`);
+    return;
   }
 }
 

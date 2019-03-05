@@ -7,33 +7,7 @@ const { parseData } = require('./helpers/parseData');
 const getDataFromFile = require('./helpers/getDataFromFile');
 const { sortbyGender, sortBybirthDate, sortByLastName_desc } = require('./helpers/sort');
 const displayInConsole = require('./helpers/displayInConsole');
-
-app.use(bodyParser.urlencoded({extended:false})); 
-app.use(bodyParser.json()); 
-
-app.post('/records', function(req, res) {
-  console.log('body', req.body.data);
-  appData.push(req.body.data);
-	res.send(appData);
-});
-
-app.get('/records/birthdate', function(req, res) {
-  const responseData = sortBybirthDate(appData); 
-  res.send(responseData);
-});
-
-app.get('/records/gender', function(req, res) {
-  const responseData = sortbyGender(appData);
-  res.send(responseData);
-});
-
-app.get('/records/name', function(req, res) {
-  res.send(sortByLastName_desc(appData));
-});
-
-app.listen(port, function(){
-	console.log(`🌎 ==> Server now on port ${port}!`);
-}); 
+const { records, birthdate, gender, name } = require('./routes');
 
 //get input strings from process.argv
 const fileListInput = process.argv.slice(2);
@@ -48,10 +22,50 @@ fileListInput.forEach(file => {
  * Parse all the data from files and convert into array of objects. 
  * Each line from imported files turned into its own object.  
  */
-const appData = dataFromAllFiles.map(data => parseData(data))[0];
-//appData.then(result => console.log('promised results', result.sort((obj1, obj2) => obj1.gender > obj2.gender )));
+const appData = Promise.resolve(dataFromAllFiles.map(data => parseData(data))[0]);
 
-//sortbyGender, sortBybirthDate, sortByLastName_desc
-displayInConsole(sortbyGender(appData), 'Data sorted by gender');
-displayInConsole(sortBybirthDate(appData), 'Data sorted by birthdate');
-displayInConsole(sortByLastName_desc(appData), 'Data sorted by name');
+app.use(bodyParser.urlencoded({extended:false})); 
+app.use(bodyParser.json()); 
+
+appData.then(data => {
+  displayInConsole(sortbyGender(data), 'Data sorted by gender');
+  displayInConsole(sortBybirthDate(data), 'Data sorted by birthdate');
+  displayInConsole(sortByLastName_desc(data), 'Data sorted by name');
+
+  app.post('/records', records(data));
+  app.get('/records/birthdate', birthdate(data));
+  app.get('/records/gender', gender(data));
+  app.get('/records/name', name(data));
+
+  app.listen(port, function(){
+    console.log(`🌎 ==> Server now on port ${port}!`);
+  }); 
+});
+
+
+
+
+
+// app.post('/records', function(req, res) {
+//   appData.push(req.body.data);
+// 	res.send(appData);
+// });
+
+// app.get('/records/birthdate', function(req, res) {
+//   const responseData = sortBybirthDate(appData); 
+//   res.send(responseData);
+// });
+
+// app.get('/records/gender', function(req, res) {
+//   const responseData = sortbyGender(appData);
+//   res.send(responseData);
+// });
+
+// app.get('/records/name', function(req, res) {
+//   const responseData = sortbyGender(appData);
+//   sortByLastName_desc(appData)
+//   res.send(responseData);
+// });
+
+
+
