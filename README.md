@@ -8,3 +8,4 @@ Files types that were used in development:  .txt and .csv (saved as UTF-8 format
 
 Express server will also start with startup command (above);
 
+Run tests with `npm run test`
