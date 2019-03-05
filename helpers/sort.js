@@ -1,4 +1,3 @@
-//sort((obj1, obj2) => obj2.lastName > obj1.lastName )
 function sortbyGender (arr) {
   return arr.sort((obj1, obj2) => {
     if (obj1.gender === obj2.gender ) {
@@ -31,10 +30,3 @@ module.exports = {
   sortBybirthDate,
   sortByLastName_desc
 } 
-
-
-// var sortByProperty = function (property) {
-//   return function (x, y) {
-//       return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
-//   };
-// };

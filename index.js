@@ -1,14 +1,16 @@
-const fs = require('fs');
 const express = require('express'); 
-const app = express(); 
 const bodyParser = require('body-parser');
-const port = 3000; 
+
 const { parseData } = require('./helpers/parseData');
 const getDataFromFile = require('./helpers/getDataFromFile');
 const { sortbyGender, sortBybirthDate, sortByLastName_desc } = require('./helpers/sort');
 const displayInConsole = require('./helpers/displayInConsole');
 const { records, birthdate, gender, name } = require('./routes');
 
+// create server instance
+const app = express(); 
+// set port for server
+const PORT = 3000;
 //get input strings from process.argv
 const fileListInput = process.argv.slice(2);
 
@@ -37,35 +39,7 @@ appData.then(data => {
   app.get('/records/gender', gender(data));
   app.get('/records/name', name(data));
 
-  app.listen(port, function(){
-    console.log(`🌎 ==> Server now on port ${port}!`);
+  app.listen(PORT, function(){
+    console.log(`🌎 ==> Server now on port ${PORT}!`);
   }); 
 });
-
-
-
-
-
-// app.post('/records', function(req, res) {
-//   appData.push(req.body.data);
-// 	res.send(appData);
-// });
-
-// app.get('/records/birthdate', function(req, res) {
-//   const responseData = sortBybirthDate(appData); 
-//   res.send(responseData);
-// });
-
-// app.get('/records/gender', function(req, res) {
-//   const responseData = sortbyGender(appData);
-//   res.send(responseData);
-// });
-
-// app.get('/records/name', function(req, res) {
-//   const responseData = sortbyGender(appData);
-//   sortByLastName_desc(appData)
-//   res.send(responseData);
-// });
-
-
-
