@@ -87,11 +87,15 @@ describe('Server routes', () => {
         "favoriteColor": "aqua",
         "birthDate": "6/5/1999"
       })
-      .set('Accept', 'application/json')
       .then(res => {
-        const updateAppData = appData.push(res.body);
+        const updateAppData = appData.push({
+          "lastName": "ochoa",
+          "firstName": "melissa",
+          "gender": "female",
+          "favoriteColor": "aqua",
+          "birthDate": "6/5/1999"
+        });
         expect(res.body).toEqual(updateAppData);
-        //expect(res.body).toHaveLength(4);
       })
       .catch(err => {
         if(err) throw Error(err);
