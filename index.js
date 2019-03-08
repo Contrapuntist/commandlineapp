@@ -38,9 +38,7 @@ if (fileListInput.length > 0 ) {
   
   });
 } else {
-
-  setupRoutes();
-
+  serverStart();
 }
 
 function serverStart( data = [] ) {
