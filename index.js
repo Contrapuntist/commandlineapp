@@ -33,25 +33,24 @@ if (fileListInput.length > 0 ) {
     displayInConsole(sortbyGender(data), 'Data sorted by gender');
     displayInConsole(sortBybirthDate(data), 'Data sorted by birthdate');
     displayInConsole(sortByLastName_desc(data), 'Data sorted by name');
-  
-    app.post('/records', records(data));
-    app.get('/records/birthdate', birthdate(data));
-    app.get('/records/gender', gender(data));
-    app.get('/records/name', name(data));
+
+    setupRoutes(data);
   
     app.listen(PORT, function(){
       console.log(`🌎 ==> Server now on port ${PORT}!`);
     }); 
   });
 } else {
-  const data = [];
-  app.post('/records', records(data));
-  app.get('/records/birthdate', birthdate(data));
-  app.get('/records/gender', gender(data));
-  app.get('/records/name', name(data));
 
+  setupRoutes();
   app.listen(PORT, function(){
     console.log(`🌎 ==> Server now on port ${PORT}!`);
   }); 
 }
 
+function setupRoutes( data = [] ) {
+  app.post('/records', records(data));
+  app.get('/records/birthdate', birthdate(data));
+  app.get('/records/gender', gender(data));
+  app.get('/records/name', name(data));
+}
